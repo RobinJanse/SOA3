@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3F08F6C3-2E90-4C41-A043-E4CEADDAF759}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Domain</RootNamespace>
+    <AssemblyName>Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Backlogs\Backlog.cs" />
+    <Compile Include="Backlogs\EBacklogStates.cs" />
+    <Compile Include="Developers\Developer.cs" />
+    <Compile Include="Backlogs\BacklogItem.cs" />
+    <Compile Include="Backlogs\Activity.cs" />
+    <Compile Include="Backlogs\BacklogItemStates\BacklogItemState.cs" />
+    <Compile Include="Backlogs\BacklogItemStates\DoingState.cs" />
+    <Compile Include="Backlogs\BacklogItemStates\DoneState.cs" />
+    <Compile Include="Backlogs\BacklogItemStates\ReadyForTestingState.cs" />
+    <Compile Include="Backlogs\BacklogItemStates\TestedState.cs" />
+    <Compile Include="Backlogs\BacklogItemStates\TestingState.cs" />
+    <Compile Include="Backlogs\BacklogItemStates\TodoState.cs" />
+    <Compile Include="Developers\Role.cs" />
+    <Compile Include="Forums\Comment.cs" />
+    <Compile Include="Forums\Forum.cs" />
+    <Compile Include="Forums\Thread.cs" />
+    <Compile Include="Notifications\ExternalMessageAdapters\EmailAdapter.cs" />
+    <Compile Include="Notifications\ExternalMessageAdapters\GoogleAdapter.cs" />
+    <Compile Include="Notifications\ExternalMessageAdapters\SlackAdapter.cs" />
+    <Compile Include="Notifications\INotificationObserver.cs" />
+    <Compile Include="Notifications\INotificationObservable.cs" />
+    <Compile Include="Notifications\Notificator.cs" />
+    <Compile Include="Notifications\INotificatorService.cs" />
+    <Compile Include="Pipelines\PipelineCommands\PipelineJobAnalyzeCommand.cs" />
+    <Compile Include="Pipelines\PipelineCommands\PipelineJobUtilityCommand.cs" />
+    <Compile Include="Pipelines\PipelineCommands\PipelineJobDeployCommand.cs" />
+    <Compile Include="Pipelines\PipelineCommands\PipelineJobTestCommand.cs" />
+    <Compile Include="Pipelines\PipelineCommands\PipelineJobBuildCommand.cs" />
+    <Compile Include="Pipelines\PipelineJobCommand.cs" />
+    <Compile Include="Pipelines\Pipeline.cs" />
+    <Compile Include="Pipelines\PipelineCommands\PipelineJobPackageCommand.cs" />
+    <Compile Include="Pipelines\PipelineCommands\PipelineJobSourcesCommand.cs" />
+    <Compile Include="Pipelines\PipelineJobStatus.cs" />
+    <Compile Include="Pipelines\PipelineLoader.cs" />
+    <Compile Include="Project.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\Body.cs" />
+    <Compile Include="Reports\Footer.cs" />
+    <Compile Include="Reports\Format.cs" />
+    <Compile Include="Reports\Header.cs" />
+    <Compile Include="Reports\IReportBuilder.cs" />
+    <Compile Include="Reports\Report.cs" />
+    <Compile Include="Reports\ReportBuilderDirector.cs" />
+    <Compile Include="Reports\ReportBuilders\DeploymentReportBuilder.cs" />
+    <Compile Include="Reports\ReportBuilders\ReviewReportBuilder.cs" />
+    <Compile Include="SCM\Branch.cs" />
+    <Compile Include="SCM\Code.cs" />
+    <Compile Include="SCM\Commit.cs" />
+    <Compile Include="SCM\Repository.cs" />
+    <Compile Include="Sprints\Review.cs" />
+    <Compile Include="Sprints\Sprint.cs" />
+    <Compile Include="Sprints\ReleaseSprint.cs" />
+    <Compile Include="Sprints\ReviewSprint.cs" />
+    <Compile Include="Sprints\SprintFactory.cs" />
+    <Compile Include="Sprints\ESprintStates.cs" />
+    <Compile Include="Sprints\SprintStates\InProgressState.cs" />
+    <Compile Include="Sprints\SprintStates\FinishedState.cs" />
+    <Compile Include="Sprints\SprintStates\ScheduledState.cs" />
+    <Compile Include="Sprints\SprintStates\SprintState.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

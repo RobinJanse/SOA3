@@ -1,0 +1,6 @@
+C:\Users\robin\source\repos\SOA3\Domain\bin\Debug\Domain.dll
+C:\Users\robin\source\repos\SOA3\Domain\bin\Debug\Domain.pdb
+C:\Users\robin\source\repos\SOA3\Domain\obj\Debug\Domain.csproj.AssemblyReference.cache
+C:\Users\robin\source\repos\SOA3\Domain\obj\Debug\Domain.csproj.CoreCompileInputs.cache
+C:\Users\robin\source\repos\SOA3\Domain\obj\Debug\Domain.dll
+C:\Users\robin\source\repos\SOA3\Domain\obj\Debug\Domain.pdb

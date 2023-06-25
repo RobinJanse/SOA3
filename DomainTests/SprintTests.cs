@@ -120,6 +120,7 @@ namespace DomainTests
 
         //FR_S3 Een sprint moet de fases Scheduled, InProgress en Finished ondersteunen.
         //•	Een sprint moet de fase Scheduled ondersteunen.
+        [Fact]
         public void A_Sprint_Can_Be_Scheduled()
         {
             //Arrange

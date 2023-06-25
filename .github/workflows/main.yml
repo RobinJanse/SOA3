@@ -44,5 +44,13 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"RobinJanse_SOA3" /o:"robinjanse" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-           run: dotnet build --configuration Release --no-restore
+          MSBuild /t:rebuild ./Domain/
+          dotnet restore .\DomainTests
+          dotnet test .\DomainTests -r output --collect "Code Coverage"
+          Get-ChildItem -Recurse -Filter "*.coverage" | % {
+          $outfile = "$([System.IO.Path]::GetFileNameWithoutExtension($_.FullName)).coveragexml"
+          $output = [System.IO.Path]::Combine([System.IO.Path]::GetDirectoryName($_.FullName), $outfile)
+          "Analyse '$($_.Name)' with output '$outfile'..."
+          . "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Team Tools\Dynamic Code Coverage Tools\codecoverage.exe" analyze /output:$output $_.FullName
+          }
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"

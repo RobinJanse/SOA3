@@ -1,5 +1,6 @@
 ﻿using Domain.Pipelines;
 using Domain.Pipelines.PipelineCommands;
+using Domain.Reports;
 using Domain.Sprints;
 using Microsoft.VisualBasic;
 using System;

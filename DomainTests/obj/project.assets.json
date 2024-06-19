@@ -5537,11 +5537,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\robin\\OneDrive\\Bureaublad\\SOA3 Project\\DomainTests\\DomainTests.csproj",
+      "projectUniqueName": "C:\\Users\\robin\\OneDrive\\Documenten\\Gitprojects\\SOA3\\DomainTests\\DomainTests.csproj",
       "projectName": "DomainTests",
-      "projectPath": "C:\\Users\\robin\\OneDrive\\Bureaublad\\SOA3 Project\\DomainTests\\DomainTests.csproj",
+      "projectPath": "C:\\Users\\robin\\OneDrive\\Documenten\\Gitprojects\\SOA3\\DomainTests\\DomainTests.csproj",
       "packagesPath": "C:\\Users\\robin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\robin\\OneDrive\\Bureaublad\\SOA3 Project\\DomainTests\\obj\\",
+      "outputPath": "C:\\Users\\robin\\OneDrive\\Documenten\\Gitprojects\\SOA3\\DomainTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\robin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5558,8 +5558,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\robin\\OneDrive\\Bureaublad\\SOA3 Project\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\Users\\robin\\OneDrive\\Bureaublad\\SOA3 Project\\Domain\\Domain.csproj"
+            "C:\\Users\\robin\\OneDrive\\Documenten\\Gitprojects\\SOA3\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\robin\\OneDrive\\Documenten\\Gitprojects\\SOA3\\Domain\\Domain.csproj"
             }
           }
         }
@@ -5611,7 +5611,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }

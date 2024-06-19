@@ -1,15 +1,13 @@
-﻿using System.Collections.Generic;
-
-namespace Domain.Reports
+﻿namespace Domain.Reports
 {
-    public class Report
-    {
-        public Header Header { get; set; }
+	public class Report
+	{
+		public Header Header { get; set; }
 
-        public Body Body { get; set; }
+		public Body Body { get; set; }
 
-        public Footer Footer { get; set; }
+		public Footer Footer { get; set; }
 
-        public Format Format { get; set; }
-    }
+		public FormatType Format { get; set; }
+	}
 }

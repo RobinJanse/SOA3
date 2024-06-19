@@ -1,45 +1,41 @@
 ﻿using Domain.Developers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Forums
 {
-    public class Comment
-    {
-        private readonly Thread _thread;
-        private readonly string _comment;
-        private readonly Developer _author;
-        private readonly DateTime _date;
+	public class Comment
+	{
+		private readonly Thread thread;
+		private readonly string comment;
+		private readonly Developer author;
+		private readonly DateTime date;
 
-        public Comment(Thread thread, string comment, Developer author)
-        {
-            _thread = thread;
-            _comment = comment;
-            _author = author;
-            _date = DateTime.Now;
-        }
+		public Comment(Thread thread, string comment, Developer author)
+		{
+			this.thread = thread;
+			this.comment = comment;
+			this.author = author;
+			date = DateTime.Now;
+		}
 
-        public Thread GetThread()
-        {
-            return _thread;
-        }
+		public Thread GetThread()
+		{
+			return thread;
+		}
 
-        public string GetText()
-        {
-            return _comment;
-        }
+		public string GetText()
+		{
+			return comment;
+		}
 
-        public Developer GetAuthor()
-        {
-            return _author;
-        }
+		public Developer GetAuthor()
+		{
+			return author;
+		}
 
-        public DateTime GetDate()
-        {
-            return this._date;
-        }
-    }
+		public DateTime GetDate()
+		{
+			return date;
+		}
+	}
 }

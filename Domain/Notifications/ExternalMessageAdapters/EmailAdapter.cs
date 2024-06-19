@@ -1,18 +1,14 @@
 ﻿using Domain.Developers;
+using Domain.Notifications.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Notifications.ExternalMessageServices
 {
-    public class EmailAdapter : INotificatorService
-    {
-
-        public void SendNotification(string message, Developer developer)
-        {
-            Console.WriteLine($"Email with message: {message} send to {developer.GetName()}");
-        }
-    }
+	public class EmailAdapter : INotificatorService
+	{
+		public void SendNotification(string message, Developer developer)
+		{
+			Console.WriteLine($"Email with message: {message} send to {developer.GetName()}");
+		}
+	}
 }

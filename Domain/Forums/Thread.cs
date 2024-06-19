@@ -2,86 +2,83 @@
 using Domain.Developers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Forums
 {
-    public class Thread
-    {
-        private readonly List<Comment> _comments;
-        private readonly string _title;
-        private readonly Developer _author;
-        private readonly Activity _activity;
-        private DateTime _creationDate;
+	public class Thread
+	{
+		private readonly List<Comment> comments;
+		private readonly string title;
+		private readonly Developer author;
+		private readonly Activity activity;
+		private readonly DateTime creationDate;
 
-        public Thread(string title, Developer author, Activity activity)
-        {
-            _title = title;
-            _author = author;
-            _activity = activity;
-            _comments = new List<Comment>();
-            _creationDate = DateTime.Now;
-        }
+		public Thread(string title, Developer author, Activity activity)
+		{
+			this.title = title;
+			this.author = author;
+			this.activity = activity;
+			comments = new List<Comment>();
+			creationDate = DateTime.Now;
+		}
 
-        public void AddComment(Comment comment)
-        {
-            //if comment is null or whitespace throw exception
-            if (string.IsNullOrWhiteSpace(comment.GetText()))
-            {
-                throw new Exception("Comment can't be null or whitespace");
-            }
+		public void AddComment(Comment comment)
+		{
+			//if comment is null or whitespace throw exception
+			if (string.IsNullOrWhiteSpace(comment.GetText()))
+			{
+				throw new Exception("Comment can't be null or whitespace");
+			}
 
-            //if activity is done dont allow comments
-            if (_activity.GetStatus() == ActivityStatus.Done)
-            {
-                throw new Exception("Can't add comments to done activities");
-            }
+			//if activity is done dont allow comments
+			if (activity.GetStatus() == ActivityStatus.Done)
+			{
+				throw new Exception("Can't add comments to done activities");
+			}
 
-            foreach (var c in _comments)
-            {
-                c.GetAuthor().SendNotification($"New comment from {comment.GetAuthor().GetName()} has been posted to thread: {_title}");
-            }
+			foreach (Comment c in comments)
+			{
+				c.GetAuthor().SendNotification($"New comment from {comment.GetAuthor().GetName()} has been posted to thread: {title}");
+			}
 
-            _comments.Add(comment);
-        }
+			comments.Add(comment);
+		}
 
-        public void DeleteComment(Comment comment)
-        { 
-            if (!_comments.Contains(comment))
-            {
-                throw new Exception("Comment does not exist");
-            }
+		public void DeleteComment(Comment comment)
+		{
+			if (!comments.Contains(comment))
+			{
+				throw new Exception("Comment does not exist");
+			}
 
-            if (_activity.GetStatus() == ActivityStatus.Done)
-            {
-                throw new Exception("Can't delete comments from done activities");
-            }
+			if (activity.GetStatus() == ActivityStatus.Done)
+			{
+				throw new Exception("Can't delete comments from done activities");
+			}
 
-            _comments.Remove(comment);
-        }
+			_ = comments.Remove(comment);
+		}
 
-        public List<Comment> GetComments()
-        {
-            return _comments;
-        }
+		public List<Comment> GetComments()
+		{
+			return comments;
+		}
 
-        public Activity GetActivity()
-        {
-            return _activity;
-        }
+		public Activity GetActivity()
+		{
+			return activity;
+		}
 
-        public string GetTitle()
-        {
-            return _title;
-        }
+		public string GetTitle()
+		{
+			return title;
+		}
 
-        public DateTime GetCreationDate()
-        {
-            return _creationDate;
-        }
+		public DateTime GetCreationDate()
+		{
+			return creationDate;
+		}
 
 
-    }
+	}
 }

@@ -1,44 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Pipelines.PipelineCommands
 {
-    public class PipelineJobUtilityCommand : PipelineJobCommand
-    {
-        private bool isSucces = true;
+	public class PipelineJobUtilityCommand : PipelineJobCommand
+	{
+		private bool isSucces = true;
 
-        public PipelineJobUtilityCommand(string name, string command) : base(name, command)
-        {
+		public PipelineJobUtilityCommand(string name, string command) : base(name, command)
+		{
 
-        }
+		}
 
-        public override void Execute()
-        {
-            base.SetStatus(PipelineJobStatus.Running);
+		public override void Execute()
+		{
+			base.SetStatus(PipelineJobStatusType.Running);
 
-            Console.WriteLine($"Running command {base.GetName()} type {this.GetType().Name} with command {base.GetCommand()}");
+			Console.WriteLine($"Running command {base.GetName()} type {GetType().Name} with command {base.GetCommand()}");
 
-            base.SetStatus(PipelineJobStatus.Running);
+			base.SetStatus(PipelineJobStatusType.Running);
 
-            if (isSucces)
-            {
-                base.SetOutput("Sources succesfully retrieved");
-                base.SetStatus(PipelineJobStatus.FINISHED);
-            }
-            else
-            {
-                base.SetOutput("Sources unsuccesfully retrieved");
-                base.SetStatus(PipelineJobStatus.FAILED);
-            }
-        }
+			if (isSucces)
+			{
+				base.SetOutput("Sources succesfully retrieved");
+				base.SetStatus(PipelineJobStatusType.FINISHED);
+			}
+			else
+			{
+				base.SetOutput("Sources unsuccesfully retrieved");
+				base.SetStatus(PipelineJobStatusType.FAILED);
+			}
+		}
 
-        //Just for testing purposes
-        public void MakePipelineFail()
-        {
-            isSucces = false;
-        }
-    }
+		//Just for testing purposes
+		public void MakePipelineFail()
+		{
+			isSucces = false;
+		}
+	}
 }

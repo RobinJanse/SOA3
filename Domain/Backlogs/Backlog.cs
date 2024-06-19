@@ -1,48 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Backlogs
 {
-    public  class Backlog
-    {
-        private readonly List<BacklogItem> _backlogItems;
-        private readonly Project _project;
+	public class Backlog
+	{
+		private readonly List<BacklogItem> backlogItems;
+		private readonly Project project;
 
-        public Backlog(Project project)
-        {
-            _project = project;
-            _backlogItems = new List<BacklogItem>();
-        }
+		public Backlog(Project project)
+		{
+			this.project = project;
+			backlogItems = new List<BacklogItem>();
+		}
 
-        public void AddBacklogItem(BacklogItem backlogItem)
-        {
-            if (_backlogItems.Contains(backlogItem))
-                throw new Exception("Can't add the same backlogItem twice");
+		public void AddBacklogItem(BacklogItem backlogItem)
+		{
+			if (backlogItems.Contains(backlogItem))
+			{
+				throw new Exception("Can't add the same backlogItem twice");
+			}
 
-            _backlogItems.Add(backlogItem);
-        }
+			backlogItems.Add(backlogItem);
+		}
 
-        public void RemoveBacklogItem(BacklogItem backlogItem)
-        { 
-            if(!_backlogItems.Contains(backlogItem))
-            {
-                throw new Exception("BacklogItem not found");
-            }
+		public void RemoveBacklogItem(BacklogItem backlogItem)
+		{
+			if (!backlogItems.Contains(backlogItem))
+			{
+				throw new Exception("BacklogItem not found");
+			}
 
-            _backlogItems.Remove(backlogItem);
-        }
+			_ = backlogItems.Remove(backlogItem);
+		}
 
-        public List<BacklogItem> GetBacklogItems()
-        {
-            return _backlogItems;
-        }
+		public List<BacklogItem> GetBacklogItems()
+		{
+			return backlogItems;
+		}
 
-        public Project GetProject()
-        {
-            return _project;
-        }
-    }
+		public Project GetProject()
+		{
+			return project;
+		}
+	}
 }

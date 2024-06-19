@@ -3,23 +3,23 @@ using System;
 
 namespace Domain.SCM
 {
-    public class Commit
-    {
-        private readonly Developer developer;
-        private readonly DateTime _createdOn;
-        private readonly Code _code;
+	public class Commit
+	{
+		private readonly Developer developer;
+		private readonly DateTime createdOn;
+		private readonly Code code;
 
-        public Commit(Developer developer, Code code)
-        {
-            this.developer = developer;
-            this._createdOn = DateTime.Now;
-            _code = code;
-        }
+		public Commit(Developer developer, Code code)
+		{
+			this.developer = developer;
+			createdOn = DateTime.Now;
+			this.code = code;
+		}
 
 
-        public Code GetCode()
-        {
-            return this._code;
-        }
-    }
+		public Code GetCode()
+		{
+			return code;
+		}
+	}
 }

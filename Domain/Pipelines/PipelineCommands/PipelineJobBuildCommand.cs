@@ -1,46 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Pipelines.PipelineCommands
 {
-    public class PipelineJobBuildCommand : PipelineJobCommand
-    {
-        private bool _isSucces = true;
+	public class PipelineJobBuildCommand : PipelineJobCommand
+	{
+		private bool isSucces = true;
 
-        private bool _buildWithDebugOn = false;
+		private readonly bool buildWithDebugOn = false;
 
-        public PipelineJobBuildCommand(string name, string command, bool buildWithDebugOn) : base(name, command)
-        {
-            _buildWithDebugOn = buildWithDebugOn;
-        }
+		public PipelineJobBuildCommand(string name, string command, bool buildWithDebugOn) : base(name, command)
+		{
+			this.buildWithDebugOn = buildWithDebugOn;
+		}
 
-        public override void Execute()
-        {
-            base.SetStatus(PipelineJobStatus.Running);
+		public override void Execute()
+		{
+			base.SetStatus(PipelineJobStatusType.Running);
 
-            Console.WriteLine($"Running command {base.GetName()} type {this.GetType().Name} with command {base.GetCommand()} BuildDebugOnStats {_buildWithDebugOn}");
+			Console.WriteLine($"Running command {base.GetName()} type {GetType().Name} with command {base.GetCommand()} BuildDebugOnStats {buildWithDebugOn}");
 
-            base.SetStatus(PipelineJobStatus.Running);
+			base.SetStatus(PipelineJobStatusType.Running);
 
-            if (_isSucces)
-            {
-                base.SetOutput($"Sources succesfully retrieved BuildDebugOnStatus = {_buildWithDebugOn}");
-                base.SetStatus(PipelineJobStatus.FINISHED);
-            }
-            else
-            {
-                base.SetOutput($"Sources unsuccesfully retrieved BuildDebugOnStatus = {_buildWithDebugOn}");
-                base.SetStatus(PipelineJobStatus.FAILED);
-            }
-        }
+			if (isSucces)
+			{
+				base.SetOutput($"Sources succesfully retrieved BuildDebugOnStatus = {buildWithDebugOn}");
+				base.SetStatus(PipelineJobStatusType.FINISHED);
+			}
+			else
+			{
+				base.SetOutput($"Sources unsuccesfully retrieved BuildDebugOnStatus = {buildWithDebugOn}");
+				base.SetStatus(PipelineJobStatusType.FAILED);
+			}
+		}
 
-        //Just for testing purposes
-        public void MakePipelineFail()
-        {
-            _isSucces = false;
-        }
-    }
+		//Just for testing purposes
+		public void MakePipelineFail()
+		{
+			isSucces = false;
+		}
+	}
 }

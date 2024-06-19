@@ -1,39 +1,36 @@
-﻿using Domain.Sprints;
+﻿using Domain.Reports.Interfaces;
+using Domain.Sprints;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Reports.ReportBuilders
 {
-    public class ReviewReportBuilder : IReportBuilder
-    {
-        private readonly Report _report;
+	public class ReviewReportBuilder : IReportBuilder
+	{
+		private readonly Report report;
 
-        public ReviewReportBuilder()
-        {
-            _report = new Report();
-        }
-        public void BuildBody(string content)
-        {
-            _report.Body = new Body {Content = content };
-        }
+		public ReviewReportBuilder()
+		{
+			report = new Report();
+		}
+		public void BuildBody(string content)
+		{
+			report.Body = new Body { Content = content };
+		}
 
-        public void BuildFooter()
-        {
-            _report.Footer = new Footer {companyname = "Student Report", companyLogo = "" };
-        }
+		public void BuildFooter()
+		{
+			report.Footer = new Footer { CompanyName = "Student Report", CompanyLogo = "" };
+		}
 
-        public void BuildHeader(DateTime date, Sprint sprint, string reportName)
-        {
-            _report.Header = new Header { creationDate = date, sprintName = sprint.GetName(), reportName = reportName };
-        }
+		public void BuildHeader(DateTime date, Sprint sprint, string reportName)
+		{
+			report.Header = new Header { CreationDate = date, SprintName = sprint.GetName(), ReportName = reportName };
+		}
 
-        public Report GetReport(Format format)
-        {
-            _report.Format = format;
-            return _report;
-        }
-    }
+		public Report GetReport(FormatType format)
+		{
+			report.Format = format;
+			return report;
+		}
+	}
 }

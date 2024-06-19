@@ -1,174 +1,173 @@
 ﻿using Domain.Backlogs.BacklogItemStates;
+using Domain.Backlogs.Enums;
 using Domain.Developers;
 using Domain.Notifications;
+using Domain.Notifications.Interfaces;
 using Domain.Sprints;
 using System;
 using System.Collections.Generic;
 
 namespace Domain.Backlogs
 {
-    public class BacklogItem : INotificationObservable
-    {
-        private string _name;
-        private string _description;
-        private int _effort;
+	public class BacklogItem : INotificationObservable
+	{
+		private string name;
+		private string description;
+		private int effort;
 
-        private List<Activity> _activities;
-        private Developer _assignedDeveloper;
+		private readonly List<Activity> activities;
+		private Developer assignedDeveloper;
 
-        private readonly Backlog _backlog;
-        private Sprint _sprint;
+		private readonly Backlog backlog;
+		private Sprint sprint;
 
-        private BacklogItemState _state;
-        private List<INotificationObserver> _observers;
+		private BacklogItemState state;
+		private readonly List<INotificationObserver> observers;
 
-        public BacklogItem(string name, string description, int effort, Backlog backlog)
-        {
-            this._name = name;
-            this._description = description;
-            this._effort = effort;
-            _state = new TodoState(this);
-            _backlog = backlog;
-            _observers = new List<INotificationObserver>();
+		public BacklogItem(string name, string description, int effort, Backlog backlog)
+		{
+			this.name = name;
+			this.description = description;
+			this.effort = effort;
+			state = new TodoState(this);
+			this.backlog = backlog;
+			observers = new List<INotificationObserver>();
 
-            _activities = new List<Activity>();
-        }
+			activities = new List<Activity>();
+		}
 
-        public void SetSprint(Sprint sprint)
-        {
-            _sprint = sprint;
-        }
+		public void SetSprint(Sprint sprint)
+		{
+			this.sprint = sprint;
+		}
 
-        public Sprint GetSprint()
-        {
-            return _sprint;
-        }
+		public Sprint GetSprint()
+		{
+			return sprint;
+		}
 
-        public bool AllActivitiesDone()
-        {
-            foreach (Activity activity in _activities)
-            {
-               if (activity.GetStatus() != ActivityStatus.Done) 
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
+		public bool AllActivitiesDone()
+		{
+			foreach (Activity activity in activities)
+			{
+				if (activity.GetStatus() != ActivityStatus.Done)
+				{
+					return false;
+				}
+			}
+			return true;
+		}
 
-        public bool AllActivitiesDoneOrActive()
-        {
-            foreach (Activity activity in _activities)
-            {
-                if (activity.GetStatus() != ActivityStatus.Todo)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
+		public bool AllActivitiesDoneOrActive()
+		{
+			foreach (Activity activity in activities)
+			{
+				if (activity.GetStatus() != ActivityStatus.Todo)
+				{
+					return false;
+				}
+			}
+			return true;
+		}
 
-        public void SetName(string name)
-        {
-            _name = name;
-        }
+		public void SetName(string name)
+		{
+			this.name = name;
+		}
 
-        public string GetName()
-        {
-            return _name;
-        }
+		public string GetName()
+		{
+			return name;
+		}
 
-        public void SetDescription(string description)
-        {
-            _description = description;
-        }
+		public void SetDescription(string description)
+		{
+			this.description = description;
+		}
 
-        public string GetDescription()
-        {
-            return _description;
-        }
+		public string GetDescription()
+		{
+			return description;
+		}
 
-        public void SetEffort(int effort)
-        {
-            _effort = effort;
-        }
+		public void SetEffort(int effort)
+		{
+			this.effort = effort;
+		}
 
-        public int GetEffort()
-        {
-            return _effort;
-        }
+		public int GetEffort()
+		{
+			return effort;
+		}
 
-        public void AssignDeveloper(Developer newAssignedDeveloper)
-        {
-            _assignedDeveloper = newAssignedDeveloper;
-            Register(new Notificator(_assignedDeveloper));
-        }
+		public void AssignDeveloper(Developer newAssignedDeveloper)
+		{
+			assignedDeveloper = newAssignedDeveloper;
+			Register(new Notificator(assignedDeveloper));
+		}
 
-        public Developer GetAssignedDeveloper()
-        {
-            return _assignedDeveloper;
-        }
+		public Developer GetAssignedDeveloper()
+		{
+			return assignedDeveloper;
+		}
 
-        public void ChangeState(BacklogItemState state)
-        {
-            //The state of the backlogItem can only be changed once it has a sprint reference
-            if (_sprint == null)
-            { 
-                throw new Exception("The backlogItem is not part a sprint so state can't be changed");
-            }
-            _state = state;
-            Notify(_state.GetState().ToString());
-        }
+		public void ChangeState(BacklogItemState state)
+		{
+			//The state of the backlogItem can only be changed once it has a sprint reference
+			if (sprint == null)
+			{
+				throw new Exception("The backlogItem is not part a sprint so state can't be changed");
+			}
+			this.state = state;
+			Notify(this.state.GetState().ToString());
+		}
 
-        public EBacklogStates GetStateType()
-        {
-            return _state.GetState();
-        }
+		public BacklogStateType GetStateType()
+		{
+			return state.GetState();
+		}
 
-        public BacklogItemState GetState()
-        {
-            return _state;
-        }
+		public BacklogItemState GetState()
+		{
+			return state;
+		}
 
-        public List<Activity> GetActivities()
-        {
-            return _activities;
-        }
+		public List<Activity> GetActivities()
+		{
+			return activities;
+		}
 
-        public void AddActivity(Activity activity)
-        {
-            if (!_activities.Contains(activity))
-            { 
-                _activities.Add(activity);
-            }
-        }
+		public void AddActivity(Activity activity)
+		{
+			if (!activities.Contains(activity))
+			{
+				activities.Add(activity);
+			}
+		}
 
-        public bool RemoveActivity(Activity activity)
-        {
-            if (_activities == null)
-            {
-                throw new NotSupportedException("There are no tasks in this backlogItem");
-            }
+		public bool RemoveActivity(Activity activity)
+		{
+			return activities == null
+				? throw new NotSupportedException("There are no tasks in this backlogItem")
+				: activities.Remove(activity);
+		}
 
-            return _activities.Remove(activity);
-        }
+		public void Register(INotificationObserver observer)
+		{
+			observers.Add(observer);
+		}
 
-        public void Register(INotificationObserver observer)
-        {
-            _observers.Add(observer);
-        }
+		public void UnRegister(INotificationObserver observer)
+		{
+			_ = observers.Remove(observer);
+		}
 
-        public void UnRegister(INotificationObserver observer)
-        {
-            _observers.Remove(observer);
-        }
-
-        public void Notify(string message)
-        {
-            foreach (var observer in _observers)
-            {
-                observer.Update(message);                
-            }
-        }
-    }
+		public void Notify(string message)
+		{
+			foreach (INotificationObserver observer in observers)
+			{
+				observer.Update(message);
+			}
+		}
+	}
 }

@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Reports
 {
-    public class Header
-    {
-        public string companyname { get; set; }
+	public class Header
+	{
+		public string CompanyName { get; set; }
 
-        public string companyLogo { get; set; }
+		public string CompanyLogo { get; set; }
 
-        public string sprintName { get; set; }
+		public string SprintName { get; set; }
 
-        public string reportName { get; set; }
+		public string ReportName { get; set; }
 
-        public DateTime creationDate { get; set; }
-    }
+		public DateTime CreationDate { get; set; }
+	}
 }

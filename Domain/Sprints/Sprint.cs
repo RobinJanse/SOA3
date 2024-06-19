@@ -1,154 +1,137 @@
 ﻿using Domain.Backlogs;
 using Domain.Developers;
 using Domain.Pipelines;
-using Domain.Reports;
 using Domain.Sprints.SprintStates;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace Domain.Sprints
 {
-    public abstract class Sprint
-    {
-        private readonly Project _project;
-        private readonly List<BacklogItem> _backlogItems;
+	public abstract class Sprint
+	{
+		private readonly Project project;
+		private readonly List<BacklogItem> backlogItems;
 
-        private string _name;
-        private DateTime _startDate;
-        private DateTime _endDate;
-        private SprintState _state;
+		private string name;
+		private DateTime startDate;
+		private DateTime endDate;
+		private SprintState state;
 
-        private readonly Developer _scrumMaster;
-        private readonly List<Developer> _developers;
+		private readonly Developer scrumMaster;
+		private readonly List<Developer> developers;
 
-        private Pipeline _pipeline;
+		private Pipeline pipeline;
 
 
-        public Sprint(Project project, string name, DateTime startDate, DateTime endDate, Developer scrumMaster, List<Developer> developers)
-        {
-            _project = project;
-            _name = name;
-            _startDate = startDate;
-            _endDate = endDate;
-            _scrumMaster = scrumMaster;
-            _developers = developers;
+		public Sprint(Project project, string name, DateTime startDate, DateTime endDate, Developer scrumMaster, List<Developer> developers)
+		{
+			this.project = project;
+			this.name = name;
+			this.startDate = startDate;
+			this.endDate = endDate;
+			this.scrumMaster = scrumMaster;
+			this.developers = developers;
 
-            _backlogItems = new List<BacklogItem>();
+			backlogItems = new List<BacklogItem>();
 
-            _state = new ScheduledState(this);
-        }
+			state = new ScheduledState(this);
+		}
 
-        public void SetPipeline(Pipeline pipeline)
-        {
-            _pipeline = pipeline;
-        }
+		public void SetPipeline(Pipeline pipeline)
+		{
+			this.pipeline = pipeline;
+		}
 
-        public Pipeline GetPipeline()
-        {
-            return _pipeline;
-        }
+		public Pipeline GetPipeline()
+		{
+			return pipeline;
+		}
 
-        public void AddDeveloper(Developer developer)
-        {
-            _developers.Add(developer);
-        }
+		public void AddDeveloper(Developer developer)
+		{
+			developers.Add(developer);
+		}
 
-        public void AddToSprintBacklog(BacklogItem backlogItem)
-        {
-            //Add backlogItem to sprintbacklog only when it is not already in the sprintbacklog
-            if (!_backlogItems.Contains(backlogItem))
-                backlogItem.SetSprint(this);
-                _backlogItems.Add(backlogItem);
-        }
+		public void AddToSprintBacklog(BacklogItem backlogItem)
+		{
+			//Add backlogItem to sprintbacklog only when it is not already in the sprintbacklog
+			if (!backlogItems.Contains(backlogItem))
+			{
+				backlogItem.SetSprint(this);
+			}
 
-        public void ChangeState(SprintState state)
-        {
-            this._state = state;
-        }
+			backlogItems.Add(backlogItem);
+		}
 
-        public List<BacklogItem> GetBacklogItems()
-        {
-            return this._backlogItems;
-        }
+		public void ChangeState(SprintState state)
+		{
+			this.state = state;
+		}
 
-        public List<Developer> GetDevelopers()
-        {
-            return this._developers;
-        }
+		public List<BacklogItem> GetBacklogItems()
+		{
+			return backlogItems;
+		}
 
-        public DateTime GetEndDate()
-        {
-            return this._endDate;
-        }
+		public List<Developer> GetDevelopers()
+		{
+			return developers;
+		}
 
-        public string GetName()
-        {
-            return this._name;
-        }
+		public DateTime GetEndDate()
+		{
+			return endDate;
+		}
 
-        public Project GetProject()
-        {
-            return this._project;
-        }
+		public string GetName()
+		{
+			return name;
+		}
 
-        public Developer GetScrumMaster()
-        {
-            return this._scrumMaster;
-        }
+		public Project GetProject()
+		{
+			return project;
+		}
 
-        public DateTime GetStartDate()
-        {
-            return this._startDate;
-        }
+		public Developer GetScrumMaster()
+		{
+			return scrumMaster;
+		}
 
-        public SprintState GetState()
-        {
-            return this._state;
-        }
+		public DateTime GetStartDate()
+		{
+			return startDate;
+		}
 
-        public void SetEndDate(DateTime endDate)
-        {
-            if (_pipeline == null || _pipeline.GetStatus() != PipelineJobStatus.Running)
-            {
-                _endDate = endDate;
-            }
-            else
-            {
-                throw new Exception("Can't change end date when pipeline is running");
-            }
-        }
+		public SprintState GetState()
+		{
+			return state;
+		}
 
-        public void SetName(string name)
-        {
-            if (_pipeline ==null || _pipeline.GetStatus() != PipelineJobStatus.Running)
-            {
-                _name = name;
-            }
-            else
-            {
-                throw new Exception("Can't change end date when pipeline is running");
-            }
-        }
+		public void SetEndDate(DateTime endDate)
+		{
+			this.endDate = pipeline == null || pipeline.GetStatus() != PipelineJobStatusType.Running
+				? endDate
+				: throw new Exception("Can't change end date when pipeline is running");
+		}
 
-        public void SetStartDate(DateTime startDate)
-        {
-            if (_pipeline == null || _pipeline.GetStatus() != PipelineJobStatus.Running)
-            {
-                _startDate = startDate;
-            }
-            else
-            {
-                throw new Exception("Can't change end date when pipeline is running");
-            }
-        }
+		public void SetName(string name)
+		{
+			this.name = pipeline == null || pipeline.GetStatus() != PipelineJobStatusType.Running
+				? name
+				: throw new Exception("Can't change end date when pipeline is running");
+		}
 
- 
-       
+		public void SetStartDate(DateTime startDate)
+		{
+			this.startDate = pipeline == null || pipeline.GetStatus() != PipelineJobStatusType.Running
+				? startDate
+				: throw new Exception("Can't change end date when pipeline is running");
+		}
 
-      
-    }
+
+
+
+
+	}
 }

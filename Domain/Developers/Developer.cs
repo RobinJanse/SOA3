@@ -1,39 +1,39 @@
-﻿using Domain.Notifications;
+﻿using Domain.Developers.Enums;
 using Domain.Notifications.ExternalMessageServices;
-using System;
-using System.Data;
+using Domain.Notifications.Interfaces;
 
 namespace Domain.Developers
 {
-    public class Developer
-    {
-        private string _name;
-        private readonly Role _role;
-        private INotificatorService _notificatorService;
-        public Developer(string name, Role role)
-        {
-            this._name = name;
-            this._role = role;
-            this._notificatorService = new EmailAdapter();
-        }
+	public class Developer
+	{
+		private readonly string name;
+		private readonly RoleType role;
+		private INotificatorService notificatorService;
+		public Developer(string name, RoleType role)
+		{
+			this.name = name;
+			this.role = role;
+			notificatorService = new EmailAdapter();
+		}
 
-        public Role GetRole()
-        {
-            return this._role;
-        }
+		public RoleType GetRole()
+		{
+			return role;
+		}
 
-        public void SendNotification(string message)
-        {
-            this._notificatorService.SendNotification(message, this);
-        }
+		public void SendNotification(string message)
+		{
+			notificatorService.SendNotification(message, this);
+		}
 
-        public void setNotificatorService(INotificatorService notificatorService)
-        {
-            this._notificatorService = notificatorService;
-        }
+		public void setNotificatorService(INotificatorService notificatorService)
+		{
+			this.notificatorService = notificatorService;
+		}
 
-        public string GetName() {
-            return _name;
-        }
-    }
+		public string GetName()
+		{
+			return name;
+		}
+	}
 }

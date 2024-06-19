@@ -1,64 +1,64 @@
-﻿using Domain.Notifications;
+﻿using Domain.Notifications.Interfaces;
 using System;
 using System.Collections.Generic;
 
 namespace Domain.SCM
 {
-    public class Branch : INotificationObservable
-    {
-        private string _name;
-        private DateTime _changeDate;
-        private Code _code;
+	public class Branch : INotificationObservable
+	{
+		private readonly string name;
+		private DateTime changeDate;
+		private Code code;
 
-        private List<INotificationObserver> _observers;
+		private readonly List<INotificationObserver> observers;
 
-        public Branch(string name)
-        {
-            this._name = name;
-            this._changeDate = DateTime.Now;
-            this._code = new Code("");
-            this._observers = new List<INotificationObserver>();
-        }
+		public Branch(string name)
+		{
+			this.name = name;
+			changeDate = DateTime.Now;
+			code = new Code("");
+			observers = new List<INotificationObserver>();
+		}
 
 
-        public string GetName()
-        {
-            return this._name;
-        }
+		public string GetName()
+		{
+			return name;
+		}
 
-        public DateTime GetChangeDate()
-        {
-            return this._changeDate;
-        }
+		public DateTime GetChangeDate()
+		{
+			return changeDate;
+		}
 
-        public Code GetCode()
-        {
-            return this._code;
-        }
+		public Code GetCode()
+		{
+			return code;
+		}
 
-        public void PushCommit(Commit commit)
-        {
-                this._code = commit.GetCode();
-                this.Notify($"new commit pushed has been pushed to {_name}");
-                this._changeDate = DateTime.Now;
-        }
+		public void PushCommit(Commit commit)
+		{
+			code = commit.GetCode();
+			Notify($"new commit pushed has been pushed to {name}");
+			changeDate = DateTime.Now;
+		}
 
-        public void Register(INotificationObserver observer)
-        {
-            _observers.Add(observer);
-        }
+		public void Register(INotificationObserver observer)
+		{
+			observers.Add(observer);
+		}
 
-        public void UnRegister(INotificationObserver observer)
-        {
-            _observers.Remove(observer);
-        }
+		public void UnRegister(INotificationObserver observer)
+		{
+			_ = observers.Remove(observer);
+		}
 
-        public void Notify(string message)
-        {
-           foreach(INotificationObserver observer in _observers)
-            {
-                observer.Update(message);
-            }
-        }
-    }
+		public void Notify(string message)
+		{
+			foreach (INotificationObserver observer in observers)
+			{
+				observer.Update(message);
+			}
+		}
+	}
 }

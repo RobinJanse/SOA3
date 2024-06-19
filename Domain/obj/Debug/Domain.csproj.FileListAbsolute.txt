@@ -10,3 +10,9 @@ C:\Users\robin\OneDrive\Bureaublad\SOA3 Project\Domain\obj\Debug\Domain.csproj.A
 C:\Users\robin\OneDrive\Bureaublad\SOA3 Project\Domain\obj\Debug\Domain.csproj.CoreCompileInputs.cache
 C:\Users\robin\OneDrive\Bureaublad\SOA3 Project\Domain\obj\Debug\Domain.dll
 C:\Users\robin\OneDrive\Bureaublad\SOA3 Project\Domain\obj\Debug\Domain.pdb
+C:\Users\robin\OneDrive\Documenten\Gitprojects\SOA3\Domain\bin\Debug\Domain.dll
+C:\Users\robin\OneDrive\Documenten\Gitprojects\SOA3\Domain\bin\Debug\Domain.pdb
+C:\Users\robin\OneDrive\Documenten\Gitprojects\SOA3\Domain\obj\Debug\Domain.csproj.AssemblyReference.cache
+C:\Users\robin\OneDrive\Documenten\Gitprojects\SOA3\Domain\obj\Debug\Domain.csproj.CoreCompileInputs.cache
+C:\Users\robin\OneDrive\Documenten\Gitprojects\SOA3\Domain\obj\Debug\Domain.dll
+C:\Users\robin\OneDrive\Documenten\Gitprojects\SOA3\Domain\obj\Debug\Domain.pdb
